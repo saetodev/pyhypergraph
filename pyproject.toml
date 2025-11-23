@@ -1,0 +1,11 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyhypergraph"
+version = "0.0.1"
+description = "A python library for hypergraphs"
+authors = [
+    { name = "Dominick Serwe", email = "dom.serwe@gmail.com" }
+]
