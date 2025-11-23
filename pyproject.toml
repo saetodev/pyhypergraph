@@ -9,3 +9,6 @@ description = "A python library for hypergraphs"
 authors = [
     { name = "Dominick Serwe", email = "dom.serwe@gmail.com" }
 ]
+dependencies = [
+    "pytest>=9.0.1"
+]
