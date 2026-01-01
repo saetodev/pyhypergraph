@@ -1,6 +1,6 @@
 
 class Hypergraph:
-    def __init__(self, vertices, edges):
+    def __init__(self, vertices: list, edges: list):
         self._vertices = vertices
         self._edges = edges
 
@@ -11,6 +11,16 @@ class Hypergraph:
     @property
     def edges(self):
         return self._edges
+    
+    #The following two methods will return the order and cardinality of the hypergraph
+
+    @property
+    def order(self):
+        return len(self._vertices)
+    
+    @property
+    def size(self):
+        return len(self._edges)
 
 def reduce_hypergraph(h: Hypergraph) -> Hypergraph:
     edges_reduced = h.edges.copy()
