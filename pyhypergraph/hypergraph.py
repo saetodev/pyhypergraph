@@ -1,6 +1,6 @@
 
 class Hypergraph:
-    def __init__(self, vertices: list, edges: list):
+    def __init__(self, vertices: list = [], edges: list = []):
         self._vertices = vertices
         self._edges = edges
 
@@ -25,6 +25,24 @@ class Hypergraph:
     #Tells python how to represent a hypergraph
     def __repr__(self):
         return f"Hypergraph({self.vertices},{self.edges})"
+    
+    #Determines if a hypergraph is empty
+    def is_empty(self):
+        """
+        Docstring for is_empty
+        
+        (any) -> bool
+        determine if a hypergraph is empty or not i.e. if the hypergraph has no edges nor vertices.
+
+        Example
+        h = Hypergraph([],[])
+        print(h.is_empty())
+
+        >>> True
+
+        """
+
+        return not self.vertices and not self.edges
 
 def reduce_hypergraph(h: Hypergraph) -> Hypergraph:
     edges_reduced = h.edges.copy()
