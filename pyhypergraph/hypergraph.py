@@ -62,6 +62,125 @@ class Hypergraph:
         """
 
         return not not self.vertices and not self.edges
+    
+    #deletes a vertec from hypergraph
+    def weak_vertex_deletion(self,vertex):
+
+        """
+        Docstring for weak_vertex_deletion
+        
+        (any) -> None
+
+        This method deletes a vertex from the hypergraph
+
+        Note: it does not return anything and it directly modifies the hypergraph.
+            - if you want to use this method and still have the original hypergraph, make sure you have a copy of the original.
+        
+        Example
+
+        h = Hypergraph([1,2,3,4,5],[[1,2,3],[1,2,5],[3,4]])
+        h.weak_vertex_deletion(3)
+        print(h)
+
+        >>> Hypergraph([1, 2, 4, 5],[[1, 2], [1, 2, 5], [4]])
+            
+        """
+        
+        if vertex in self.vertices:
+            self.vertices.remove(vertex)
+
+            for e in self.edges:
+                if vertex in e:
+                    e.remove(vertex)
+        else:
+            print(f"{vertex} is not a vertex of {self}")
+    
+    #deletes an edge from hypergraph
+    def weak_edge_deletion(self, edge: list):
+        """
+        Docstring for weak_edge_deletion
+        
+        (list) -> None
+
+        This method deletes the edge from the hypergraph while leaving the vertices unchange
+
+         Note: it does not return anything and it directly modifies the hypergraph.
+            - if you want to use this method and still have the original hypergraph, make sure you have a copy of the original.
+
+        Example
+
+        h = Hypergraph([1,2,3,4,5],[[1,2,3],[1,2,5],[3,4]])
+        h.weak_edge_deletion([1,2,3])
+        print(h)
+
+        >>> Hypergraph([1, 2, 3, 4, 5],[[1, 2, 5], [3, 4]])
+        """
+        if edge in self.edges:
+            self.edges.remove(edge)
+        else:
+            print(f"{edge} is not a hyperedge of {self}")
+
+    #deletes a vertex and all its incident edges from hypergraph
+    def strong_vertex_deletion(self,vertex):
+        """
+        Docstring for strong_vertex_deletion
+        
+        (any) -> None
+
+        This method deletes a vertex and all its incident edges from the hypergraph
+
+        Note: it does not return anything and it directly modifies the hypergraph.
+            - if you want to use this method and still have the original hypergraph, make sure you have a copy of the original.
+        
+        Example
+
+        h = Hypergraph([1,2,3,4,5],[[1,2,3],[1,2,5],[3,4]])
+        h.strong_vertex_deletion(3)
+        print(h)
+
+        >>> Hypergraph([1, 2, 4, 5],[[1, 2, 5]])
+
+        """
+        if vertex in self.vertices:
+
+            self.vertices.remove(vertex)
+
+            for e in self.edges:
+                if vertex in e:
+                    self.edges.remove(e)
+        else:
+            print(f"{vertex} is not a vertex of {self}")
+
+    #deletes an edge and all its vertices from the hypergraph
+    def strong_edge_deletion(self,edge:list):
+        """
+        Docstring for strong_edge_deletion
+        
+        (list) -> None
+
+        This method deletes the edge and all the vertices in it from the hypergraph 
+
+         Note: it does not return anything and it directly modifies the hypergraph.
+            - if you want to use this method and still have the original hypergraph, make sure you have a copy of the original.
+
+        Example
+
+        h = Hypergraph([1,2,3,4,5],[[1,2,3],[1,2,5],[3,4]])
+        h.strong_edge_deletion([1,2,3])
+        print(h)
+
+        >>> Hypergraph([4, 5],[[5], [4]])
+        """
+        if edge in self.edges:
+
+            self.edges.remove(edge)
+
+            for vertex in edge:
+                self.weak_vertex_deletion(vertex)
+        
+        else:
+
+            print(f"{edge} is not a hyperedge of {self}")
 
 def reduce_hypergraph(h: Hypergraph) -> Hypergraph:
     edges_reduced = h.edges.copy()
