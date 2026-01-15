@@ -63,6 +63,79 @@ class Hypergraph:
 
         return not not self.vertices and not self.edges
     
+    #returns the degree of a vertex
+    def degree_of(self, vertex):
+        """
+        Docstring for degree_of
+        
+        (any) -> int
+
+        determine the degree of a vertex in the hypergraph.
+        i.e. number of edges that contains the vertex. If the edge is a loop, it counts twice.
+
+        Note: returns -1 if the vertex is not in the graph 
+
+        Example
+
+        h = Hypergraph([1,2,3,4,5],[[1,2,3],[1,2,5],[3,4]])
+        g = Hypergraph([1],[1])
+
+        print(h.degree_of(3))
+        print(g.degree_of(1))
+        print(g.degree_of(2))
+
+        >>> 2
+        >>> 2
+        >>> -1
+
+        """
+        degree = 0
+        if vertex not in self.vertices:
+            degree = -1
+        else:
+            for e in self.edges:
+                if vertex in e:
+                    if len(e) > 1: #verfies the edge is not a loop
+                        degree +=1
+                    else:
+                        degree +=2
+
+        return degree
+                    
+    #determines if a hypergraph is k-regular
+    def is_k_regular(self) -> bool:
+        """
+        Docstring for is_k_regular
+        
+        () -> bool
+
+        determines if a hypergraph is k-regular
+        i.e. if all the vertices in the hypergraph have the same degree
+
+        note: for empty hypergraph, we assume the hypergraph is vaciously k-regular.
+
+        Example
+
+        h = Hypergraph([1,2,3,4,5],[[1,2,3],[1,2,5],[3,4]]) \n
+        g = Hypergraph([1,2,3],[[1,2],[2,3],[3,1]])\n
+
+        print(h.is_k_regular())\n
+        print(g.is_k_regular()) \n
+
+        >>> False
+        >>> True
+        """
+        if self.is_empty():
+            return True
+        else:
+            k = self.degree_of(self.vertices[0])
+            
+            for v in self.vertices:
+                if self.degree_of(v) != k:
+                    return False
+                
+            return True
+    
     #deletes a vertec from hypergraph
     def weak_vertex_deletion(self,vertex):
 
