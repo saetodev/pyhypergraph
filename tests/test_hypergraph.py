@@ -9,7 +9,7 @@ def test_reduce_hypergraph():
     assert h_reduced.edges == [{0, 1, 2}, {0, 2, 3}]
 
 h = Hypergraph([1,2,3,4,5],[[1,2,3],[1,2,5],[3,4]])
-x = Hypergraph()
+x = Hypergraph([1,2,3])
 #print(f"Vertices: {h.vertices} \n Edges: {h.edges} \n Order: {h.order} \n Size: {h.size}")
 #print(h.is_empty())
 #print(x.is_empty())
@@ -17,4 +17,12 @@ x = Hypergraph()
 #
 #print(star_center_at(h,2))
 
-print(coloring(h))
+#print(coloring(h))
+
+#h.strong_edge_deletion([1,2,3,4])
+#print(h.degree_of(1))
+
+#print(x.is_k_regular())
+
+print(x.is_k_uniform())
+print(h)

@@ -135,6 +135,40 @@ class Hypergraph:
                     return False
                 
             return True
+        
+    def is_k_uniform(self) -> bool:
+        """
+        Docstring for is_k_uniform\n
+        
+        () -> bool \n
+
+        determines if a hypergraph is K-uniform.
+        i.e. if the edges in the hypergraph have the same length. \n
+
+        Note: for empty or trivial hypergraph, we assume the hypergraph is vaciously k-uniform.\n
+
+        Example\n
+
+        h = Hypergraph([1,2,3,4,5],[[1,2,3],[1,2,5],[3,4]]) \n
+        g = Hypergraph([1,2,3],[[1,2],[2,3],[3,1]])\n
+
+        print(h.is_k_uniform())\n
+        print(g.is_k_uniform()) \n
+
+        >>> False
+        >>> True
+        """
+        if self.is_empty() or self.is_trivial():
+            return True
+        else:
+            size_of_hyperedge = len(self.edges[0])
+
+            for e in self.edges:
+                if len(e) != size_of_hyperedge:
+                    return False
+                
+            return True
+
     
     #deletes a vertec from hypergraph
     def weak_vertex_deletion(self,vertex):
